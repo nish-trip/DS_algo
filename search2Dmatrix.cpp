@@ -1,32 +1,20 @@
-#include<bits/stdc++.h>
-using namespace std;
+#include "test.h"
 
 class Solution {
 public:
-    bool searchMatrix(vector<vector<int>>& grid, int target) {
-        for(int i=0; i<grid.size(); i++){
-            if(target > grid[i][grid[0].size()-1]){
-                continue;
-            }
-            return bs(grid[i], target);
-        }
-        return false;
-    }
-
-    bool bs(vector<int>& nums, int target){
-        int l = 0, r = nums.size()-1;
-        while(l<=r){
-            int m = l+(r-l)/2;
-            if(nums[m] == target){
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int row=0, col=matrix[0].size()-1;
+        while(row<matrix.size() && col>=0){
+            if(matrix[row][col] == target){
                 return true;
             }
-            if(target>nums[m]){
-                l = m+1;
+            if(matrix[row][col]<target){
+                row++;
             }
             else{
-                r = m-1;
+                col--;
             }
-        }
-        return false;
+        }   
+        return false;   
     }
 };
