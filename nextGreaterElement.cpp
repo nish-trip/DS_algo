@@ -1,25 +1,22 @@
 #include "test.h"
 
+
 class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        vector<int>ans(nums1.size());
-        vector<int>nge(nums2.size(),-1);
+        vector<int>ans(nums1.size(),-1);
+        unordered_map<int,int>hash;
         stack<int>st;
-        for(int i=0; i<nums2.size(); i++){
-            while(!st.empty() && nums2[i]>nums2[st.top()]){
-                int idx = st.top();
+        for(int num: nums2){
+            while(!st.empty() && num>st.top()){
+                hash[st.top()] = num;
                 st.pop();
-                nge[idx] = nums2[i];
             }
-            st.push(i);
+            st.push(num);
         }      
         for(int i=0; i<nums1.size(); i++){
-            for(int j=0; j<nums2.size(); j++){
-                if(nums2[j] == nums1[i]){
-                    ans[i] = nge[j];
-                    break;
-                }
+            if(hash.count(nums1[i])){
+                ans[i] = hash[nums1[i]];
             }
         }
         return ans;
