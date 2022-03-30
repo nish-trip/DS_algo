@@ -1,3 +1,5 @@
+#include "test.h"
+
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
@@ -17,8 +19,8 @@ public:
 				while(s.count(++num)){
 					cur++;
 				}
+				ans = max(ans, cur);
 			}
-			ans = max(ans, cur);
 		}
 		return ans;
     }
