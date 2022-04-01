@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include "test.h"
 using namespace std;
 
 class Solution {
@@ -7,14 +7,15 @@ public:
         if(!head || !head->next){
             return head;
         }      
-        int n = 0;
-        ListNode *end=head, *temp = head;
+        int numOfJumps = 0;
+        ListNode* end = head;
         while(end->next){
-            n++;
             end = end->next;
+            numOfJumps++;
         }
-        n = n%2 == 1? n/2 +1: n/2;
-        while(n--){
+        numOfJumps = numOfJumps%2? (numOfJumps/2)+1: numOfJumps/2;
+        ListNode* temp = head;
+        while(numOfJumps--){
             end->next = temp->next;
             temp->next = temp->next->next;
             end->next->next = NULL;
