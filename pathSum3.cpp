@@ -3,16 +3,23 @@
 class Solution {
 public:
     int pathSum(TreeNode* root, int targetSum) {
-        if(!root) return 0;
-        return dfs(root, targetSum) + pathSum(root->left, targetSum) + pathSum(root->right, targetSum);      
+        unordered_map<int,int>hash;
+        hash[0] = 1;
+        return dfs(root, targetSum, 0, hash);
     }
-
-    int dfs(TreeNode* root, int target){
-        if(!root){
-            return 0;
+    
+    int dfs(TreeNode* root, int target, long sum, unordered_map<int,int>& hash){
+        if(!root) return 0;
+        sum+= root->val;
+        int numPathsToCurr = 0;
+        if(hash.count(sum-target)){
+            numPathsToCurr+= hash[sum-target];
         }
-        int left = dfs(root->left, target-root->val);
-        int right = dfs(root->right, target-root->val);
-        return (root->val == target) + left+right;
+        
+        hash[sum]++;
+        int numPaths = numPathsToCurr + dfs(root->left, target, sum, hash) + dfs(root->right, target, sum, hash);
+        hash[sum]--;
+        
+        return numPaths;
     }
 };
