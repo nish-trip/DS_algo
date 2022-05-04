@@ -5,7 +5,8 @@ public:
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& grid) {
         vector<vector<int>>ans;
         int rows = grid.size(), cols = grid[0].size();
-        set<pair<int,int>>pac, atl;
+        vector<vector<bool>>pac(rows, vector<bool>(cols));
+        vector<vector<bool>>atl(rows, vector<bool>(cols));
         
         for(int i=0; i<rows; i++){
             dfs(grid, pac, i, 0, grid[i][0]);
@@ -17,7 +18,7 @@ public:
         }
         for(int i=0; i<rows; i++){
             for(int j=0; j<cols; j++){
-                if(pac.count({i,j}) && atl.count({i,j})){
+                if(pac[i][j] && atl[i][j]){
                     ans.push_back({i,j});
                 }
             }
@@ -25,14 +26,14 @@ public:
         return ans;
     }
     
-    void dfs(vector<vector<int>>& grid, set<pair<int,int>>& s, int i, int j, int prev){
-        if(i<0 || j<0 || i>=grid.size() || j>=grid[0].size() || prev>grid[i][j]){
+    void dfs(vector<vector<int>>& grid, vector<vector<bool>>& vec, int i, int j, int prev){
+        if(i<0 || j<0 || i>=grid.size() || j>=grid[0].size() || grid[i][j] < prev || vec[i][j] == true){
             return;
         }
-        s.insert({i,j});
-        dfs(grid, s, i+1, j, grid[i][j]);
-        dfs(grid, s, i-1, j, grid[i][j]);
-        dfs(grid, s, i, j+1, grid[i][j]);
-        dfs(grid, s, i, j-1, grid[i][j]);
+        vec[i][j] = true;
+        dfs(grid, vec, i+1, j, grid[i][j]);
+        dfs(grid, vec, i-1, j, grid[i][j]);
+        dfs(grid, vec, i, j+1, grid[i][j]);
+        dfs(grid, vec, i, j-1, grid[i][j]);
     }
 };
