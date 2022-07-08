@@ -1,5 +1,23 @@
 {
     "files.associations": {
-        "vector": "cpp"
+        "vector": "cpp",
+        "algorithm": "cpp",
+        "iosfwd": "cpp",
+        "unordered_map": "cpp",
+        "__locale": "cpp",
+        "__threading_support": "cpp",
+        "bitset": "cpp",
+        "coroutine": "cpp",
+        "memory": "cpp",
+        "optional": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "thread": "cpp",
+        "type_traits": "cpp",
+        "typeindex": "cpp",
+        "utility": "cpp",
+        "variant": "cpp",
+        "map": "cpp"
     }
 }
